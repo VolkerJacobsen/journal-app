@@ -6,37 +6,7 @@ import Tab from "../Tab";
 import Badge from "../Badge";
 import { Fragment } from "react";
 
-const entries = [
-  {
-    id: 1000,
-    date: "Feb 5, 2025",
-    motto: "We are in a state of chaos",
-    notes:
-      "Today I learned about React State. It was fun! I can't wait to learn more.",
-  },
-  {
-    id: 999,
-    date: "Feb 4, 2025",
-    motto: "Props, Props, Props",
-    notes:
-      "Today I learned about React Props. Mad props to everyone who understands this!",
-  },
-  {
-    id: 998,
-    date: "Feb 3, 2025",
-    motto: "How to nest components online fast",
-    notes:
-      "Today I learned about React Components and how to nest them like a pro. Application design is so much fun!",
-  },
-  {
-    id: 997,
-    date: "Feb 2, 2025",
-    motto: "I'm a React Developer",
-    notes: "My React-ion when I learned about React: 😍",
-  },
-];
-
-export default function EntriesSection() {
+export default function EntriesSection({ entries, onToggleFavorite }) {
   return (
     <section className="entries-section">
       <Tabs>
@@ -49,34 +19,18 @@ export default function EntriesSection() {
       </Tabs>
       <div className="entries-section__entries">
         {entries.map((entry, index) => (
-          <Fragment key={index}>
-            {index === 0 ? null : <Divider />}
+          <Fragment key={entry.id}>
+            {index > 0 ? <Divider /> : null}
             <Entry
-              key={entry.id}
               date={entry.date}
               motto={entry.motto}
               notes={entry.notes}
+              onToggleFavorite={onToggleFavorite}
+              id={entry.id}
+              isFavorite={entry.isFavorite}
             />
           </Fragment>
         ))}
-
-        {/* <Entry
-          date="Feb 27, 2028"
-          motto="Thats life in the city"
-          notes="Si sine causa? quae fuerit causa, mox videro; interea hoc tenebo, si mihi. Et quidem se repellere, idque instituit docere sic omne animal, simul atque."
-        />
-        <Divider />
-        <Entry
-          date="Feb 26, 2028"
-          motto="Thats life in the city"
-          notes="Si sine causa? quae fuerit causa, mox videro; interea hoc tenebo, si mihi. Et quidem se repellere, idque instituit docere sic omne animal, simul atque."
-        />
-        <Divider />
-        <Entry
-          date="Feb 25, 2028"
-          motto="Thats life in the city"
-          notes="Si sine causa? quae fuerit causa, mox videro; interea hoc tenebo, si mihi. Et quidem se repellere, idque instituit docere sic omne animal, simul atque."
-        /> */}
       </div>
     </section>
   );
